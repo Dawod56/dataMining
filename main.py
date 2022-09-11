@@ -1,15 +1,13 @@
 import urllib
-
-import urllib3
 from bs4 import BeautifulSoup
 import requests
 import csv
-import pandas as pd
+
 
 
 def scrap_urls(url: str)-> None:
-    max_pages = 46
-    current_page = 20 #17
+    max_pages = 46 # max page number of pagination
+    current_page = 1 #initial page
     while current_page <= max_pages:
         # open the file in the write mode
         current_url = f'{url}/page/{current_page}'
