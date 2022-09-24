@@ -2,12 +2,16 @@ import urllib
 from bs4 import BeautifulSoup
 import requests
 import csv
+import pandas as pd
 
+from urllib3.connectionpool import xrange
 
 
 def scrap_urls(url: str)-> None:
     max_pages = 46 # max page number of pagination
     current_page = 1 #initial page
+    titles = []
+    contents = []
     while current_page <= max_pages:
         # open the file in the write mode
         current_url = f'{url}/page/{current_page}'
@@ -35,14 +39,35 @@ def scrap_urls(url: str)-> None:
             raw_soup = BeautifulSoup(raw_page.text, 'html.parser')
             title = raw_soup.find('h1',{'class':'page-header-title'}).text
             content_text =raw_soup.find('div',{'class':'entry-content entry-content-single'}).text
-
-            localFile = open('content.csv', mode='a+', newline='', encoding='utf-8')
-            writer = csv.writer(localFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow([title])
-            writer.writerow([content_text])
-            localFile.close()
-            # print(urls)
+            list = [5]
+            list = raw_soup.find_all('span', {'property': 'name'})
+            for i in list:
+                i.attrs = {}
+            print(list[1].text)
+            print(list[2].text)
+            #print(list[3].text)
+            #print(list[4].text)
+            titles.append(title)
+            content.append(content_text)
+            contents.append([list[1].text,list[2].text,title,content_text])
+            # print(titles)
+            # localFile = open('content.csv', mode='a+', newline='', encoding='utf-8')
+            # writer = csv.writer(localFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            # writer.writerow([title][content_text])
         current_page += 1
+    # localFile = open('content.csv', mode='a+', newline='', encoding='utf-8')
+    # writer = csv.writer(localFile, delimiter=' ', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    # writer.writerow([title][content_text])
+
+    df_author = pd.DataFrame(contents, columns=['Index','Chapter','Title','Content'])
+    df_author.to_csv('contents.csv')
+    #df_literature.to_csv('Literature.csv')
+    # with open("NEWFILE.csv", "w") as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     for value in int(len(titles)):
+    #         writer.writerow(titles[value])
+    # writer.writerow([titles[value], content[value]])
+
 
 def main()-> int:
     url = 'https://www.ebanglalibrary.com/category/%e0%a6%ac%e0%a6%be%e0%a6%82%e0%a6%b2%e0%a6%be-%e0%a6%ae%e0%a6%b9%e0%a6%be%e0%a6%ad%e0%a6%be%e0%a6%b0%e0%a6%a4'
