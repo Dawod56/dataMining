@@ -41,15 +41,16 @@ def scrap_urls(url: str)-> None:
             content_text =raw_soup.find('div',{'class':'entry-content entry-content-single'}).text
             list = [5]
             list = raw_soup.find_all('span', {'property': 'name'})
-            for i in list:
-                i.attrs = {}
-            print(list[1].text)
-            print(list[2].text)
-            #print(list[3].text)
-            #print(list[4].text)
-            titles.append(title)
-            content.append(content_text)
-            contents.append([list[1].text,list[2].text,title,content_text])
+            x=(len(list))
+
+            if(x>3):
+                print(list[1].text)
+                print(list[2].text)
+                print(list[3].text)
+                contents.append([list[2].text, list[3].text, title, content_text])
+            else:
+                contents.append([list[2].text,' ',title,content_text])
+
             # print(titles)
             # localFile = open('content.csv', mode='a+', newline='', encoding='utf-8')
             # writer = csv.writer(localFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
