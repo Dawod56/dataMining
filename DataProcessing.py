@@ -257,29 +257,29 @@ dp = DataProcessor(filename='contents.csv', columns=['Index', 'Chapter', 'Title'
 # List of all Bengali characters including letters and numbers
 BengaliLetterList = ['অ', 'আ', 'ই', 'ঈ', 'উ', 'ঊ', 'ঋ', 'এ', 'ঐ', 'ও', 'ঔ', 'ক', 'খ', 'গ', 'ঘ', 'ঙ', 'চ', 'ছ', 'জ', 'ঝ',
                      'ঞ', 'ট', 'ঠ', 'ড', 'ঢ', 'ণ', 'ত', 'থ', 'দ', 'ধ', 'ন', 'প', 'ফ', 'ব', 'ভ', 'ম', 'য', 'র', 'ল', 'শ',
-                     'ষ', 'স', 'হ', 'ড়', 'ঢ়', 'য়','ৎ']
+                     'ষ', 'স', 'হ', 'ড়', 'ঢ়', 'য়', 'ৎ', 'ড়', 'ঢ়', 'য়']
 
-# Unigram
-plot_from_dictionary(dp.count_token_frequencies(1, minThreshold=1, start=-20), title='Unigram (Top 20 Results)',
-                     save_to_device=True)
-
-# Bigram
-plot_from_dictionary(dp.count_token_frequencies(2, minThreshold=1, start=-20), title='Bigram (Top 20 Results)',
-                     save_to_device=True)
-
-# Trigram
-plot_from_dictionary(dp.count_token_frequencies(3, minThreshold=2, start=-20), title='Trigram (Top 20 Results)',
-                     bottom=0.3,
-                     save_to_device=True)
-
-# Tetragram
-plot_from_dictionary(dp.count_token_frequencies(4, minThreshold=2, start=-20), title='Tetragram (Top 20 Results)',
-                     bottom=0.3,
-                     save_to_device=True)
-
-# Pentagram
-plot_from_dictionary(dp.count_token_frequencies(5, minThreshold=2, start=-20), title='Pentagram (Top 20 Results)',
-                     bottom=0.3, save_to_device=True)
+# # Unigram
+# plot_from_dictionary(dp.count_token_frequencies(1, minThreshold=1, start=-20), title='Unigram (Top 20 Results)',
+#                      save_to_device=True)
+#
+# # Bigram
+# plot_from_dictionary(dp.count_token_frequencies(2, minThreshold=1, start=-20), title='Bigram (Top 20 Results)',
+#                      save_to_device=True)
+#
+# # Trigram
+# plot_from_dictionary(dp.count_token_frequencies(3, minThreshold=2, start=-20), title='Trigram (Top 20 Results)',
+#                      bottom=0.3,
+#                      save_to_device=True)
+#
+# # Tetragram
+# plot_from_dictionary(dp.count_token_frequencies(4, minThreshold=2, start=-20), title='Tetragram (Top 20 Results)',
+#                      bottom=0.3,
+#                      save_to_device=True)
+#
+# # Pentagram
+# plot_from_dictionary(dp.count_token_frequencies(5, minThreshold=2, start=-20), title='Pentagram (Top 20 Results)',
+#                      bottom=0.3, save_to_device=True)
 
 # Number of words start with a particular letter
 plot_from_dictionary(dp.count_letter_frequencies(BengaliLetterList, count_type='First letter'),
@@ -290,11 +290,11 @@ plot_from_dictionary(dp.count_letter_frequencies(BengaliLetterList, count_type='
                      title='Frequencies by all letter', save_to_device=True)
 
 # Count number of words for a particular word length (without vowels)
-plot_from_dictionary(dp.count_word_length_frequencies(BengaliLetterList, count_vowel=False),
-                     title='Word count by number of letters Without vowels', save_to_device=True)
-
-# Count number of words for a particular word length (with vowels)
-plot_from_dictionary(dp.count_word_length_frequencies(BengaliLetterList, count_vowel=True),
-                     title='Word count by number of letters With vowels ', save_to_device=True)
+# plot_from_dictionary(dp.count_word_length_frequencies(BengaliLetterList, count_vowel=False),
+#                      title='Word count by number of letters Without vowels', save_to_device=True)
+#
+# # Count number of words for a particular word length (with vowels)
+# plot_from_dictionary(dp.count_word_length_frequencies(BengaliLetterList, count_vowel=True),
+#                      title='Word count by number of letters With vowels ', save_to_device=True)
 
 print(dp.number_of_chars / dp.number_of_words)
