@@ -1,20 +1,9 @@
-# Necessary python libraries
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import sys
 import re
 
-
-# Given a dictionary as input, plot a bar chart using matplotlib
-# Params:
-#       dic     : Input dictionary
-#       title   : Title of the bar chart
-#       color   : Color of the bars
-#       size    : The window size of the bar chart
-#       x_font  : The font family to be used in x-labels. 'Nikosh' is given as default because I'm working with
-#                 Bengali dataset. Note that, to use any font, the font should be included in the font directory in the
-#                 system.
 def plot_from_dictionary(dic, title=None, size=(13.5, 8.5), bottom=0.1, x_font='kalpurush', save_to_device=False):
     fig = plt.figure(figsize=size)  # Size of the chart windows
     fig.subplots_adjust(bottom=bottom)
@@ -197,7 +186,7 @@ class DataProcessor:
 
     # Count the numbers of occurrences a particular word has
     def count_token_frequencies(self, words_per_tokens, minThreshold=1, maxThreshold=sys.maxsize, start=0):
-        dp.tokenization(words_per_token=words_per_tokens)
+        data_process.tokenization(words_per_token=words_per_tokens)
         wordDict = {}
         for word in self.tokens:
             try:
@@ -252,49 +241,29 @@ class DataProcessor:
 
 
 # Creating a DataProcessor object
-dp = DataProcessor(filename='contents.csv', columns=['Index', 'Chapter', 'Title', 'Content'], target_column='Content')
+data_process = DataProcessor(filename='contents.csv', columns=['Index', 'Chapter', 'Title', 'Content'], target_column='Content')
 
 # List of all Bengali characters including letters and numbers
 BengaliLetterList = ['অ', 'আ', 'ই', 'ঈ', 'উ', 'ঊ', 'ঋ', 'এ', 'ঐ', 'ও', 'ঔ', 'ক', 'খ', 'গ', 'ঘ', 'ঙ', 'চ', 'ছ', 'জ', 'ঝ',
                      'ঞ', 'ট', 'ঠ', 'ড', 'ঢ', 'ণ', 'ত', 'থ', 'দ', 'ধ', 'ন', 'প', 'ফ', 'ব', 'ভ', 'ম', 'য', 'র', 'ল', 'শ',
                      'ষ', 'স', 'হ', 'ড়', 'ঢ়', 'য়', 'ৎ', 'ড়', 'ঢ়', 'য়']
 
-# # Unigram
-# plot_from_dictionary(dp.count_token_frequencies(1, minThreshold=1, start=-20), title='Unigram (Top 20 Results)',
-#                      save_to_device=True)
-#
-# # Bigram
-# plot_from_dictionary(dp.count_token_frequencies(2, minThreshold=1, start=-20), title='Bigram (Top 20 Results)',
-#                      save_to_device=True)
-#
-# # Trigram
-# plot_from_dictionary(dp.count_token_frequencies(3, minThreshold=2, start=-20), title='Trigram (Top 20 Results)',
-#                      bottom=0.3,
-#                      save_to_device=True)
-#
-# # Tetragram
-# plot_from_dictionary(dp.count_token_frequencies(4, minThreshold=2, start=-20), title='Tetragram (Top 20 Results)',
-#                      bottom=0.3,
-#                      save_to_device=True)
-#
-# # Pentagram
-# plot_from_dictionary(dp.count_token_frequencies(5, minThreshold=2, start=-20), title='Pentagram (Top 20 Results)',
-#                      bottom=0.3, save_to_device=True)
+# Unigram
+plot_from_dictionary(data_process.count_token_frequencies(1, minThreshold=1, start=-20), title='Unigram (Top 20 Results)',
+                     save_to_device=True)
 
-# Number of words start with a particular letter
-plot_from_dictionary(dp.count_letter_frequencies(BengaliLetterList, count_type='First letter'),
-                     title='Frequencies by first letter', save_to_device=True)
+# Bigram
+plot_from_dictionary(data_process.count_token_frequencies(2, minThreshold=1, start=-20), title='Bigram (Top 20 Results)',
+                     save_to_device=True)
+
+# Trigram
+plot_from_dictionary(data_process.count_token_frequencies(3, minThreshold=2, start=-20), title='Trigram (Top 20 Results)',
+                     bottom=0.3,
+                     save_to_device=True)
 
 # Number of occurrences a letter has in the whole dataset
-plot_from_dictionary(dp.count_letter_frequencies(BengaliLetterList, count_type='All letters'),
+plot_from_dictionary(data_process.count_letter_frequencies(BengaliLetterList, count_type='All letters'),
                      title='Frequencies by all letter', save_to_device=True)
 
-# Count number of words for a particular word length (without vowels)
-# plot_from_dictionary(dp.count_word_length_frequencies(BengaliLetterList, count_vowel=False),
-#                      title='Word count by number of letters Without vowels', save_to_device=True)
-#
-# # Count number of words for a particular word length (with vowels)
-# plot_from_dictionary(dp.count_word_length_frequencies(BengaliLetterList, count_vowel=True),
-#                      title='Word count by number of letters With vowels ', save_to_device=True)
 
-print(dp.number_of_chars / dp.number_of_words)
+print(data_process.number_of_chars / data_process.number_of_words)

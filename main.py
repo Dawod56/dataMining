@@ -4,8 +4,6 @@ import requests
 import csv
 import pandas as pd
 
-from urllib3.connectionpool import xrange
-
 
 def scrap_urls(url: str)-> None:
     max_pages = 46 # max page number of pagination
