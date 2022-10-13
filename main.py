@@ -6,7 +6,7 @@ import pandas as pd
 
 
 def scrap_urls(url: str)-> None:
-    max_pages = 46 # max page number of pagination
+    max_pages = 62 # max page number of pagination
     current_page = 1 #initial page
     titles = []
     contents = []
