@@ -127,7 +127,6 @@ class DataProcessor:
     # Tokenize each word in a list format
     def tokenization(self, words_per_token=1):
         tokenList = []
-
         for count in range(words_per_token):
             new_token = ''
             for letter in range(len(self.preprocessed)):
@@ -200,7 +199,7 @@ class DataProcessor:
         for word in wordDict:
             if maxThreshold >= wordDict[word] >= minThreshold:
                 resDict[word] = wordDict[word]
-        print(wordDict)
+        # print(wordDict)
         return dict(zip(list(resDict.keys())[start:], list(resDict.values())[start:]))
 
     # Count the numbers of words that contains a particular letter
@@ -249,15 +248,15 @@ BengaliLetterList = ['অ', 'আ', 'ই', 'ঈ', 'উ', 'ঊ', 'ঋ', 'এ', '�
                      'ষ', 'স', 'হ', 'ড়', 'ঢ়', 'য়', 'ৎ', 'ড়', 'ঢ়', 'য়']
 
 # Unigram
-plot_from_dictionary(data_process.count_token_frequencies(1, minThreshold=1, start=-20), title='Unigram (Top 20 Results)',
+plot_from_dictionary(data_process.count_token_frequencies(1, minThreshold=1, start=-20), title='Unigram ',
                      save_to_device=True)
 
 # Bigram
-plot_from_dictionary(data_process.count_token_frequencies(2, minThreshold=1, start=-20), title='Bigram (Top 20 Results)',
+plot_from_dictionary(data_process.count_token_frequencies(2, minThreshold=1, start=-20), title='Bigram ',
                      save_to_device=True)
 
 # Trigram
-plot_from_dictionary(data_process.count_token_frequencies(3, minThreshold=2, start=-20), title='Trigram (Top 20 Results)',
+plot_from_dictionary(data_process.count_token_frequencies(3, minThreshold=2, start=-20), title='Trigram ',
                      bottom=0.3,
                      save_to_device=True)
 
@@ -266,4 +265,4 @@ plot_from_dictionary(data_process.count_letter_frequencies(BengaliLetterList, co
                      title='Frequencies by all letter', save_to_device=True)
 
 
-print(data_process.number_of_chars / data_process.number_of_words)
+# print(data_process.number_of_chars / data_process.number_of_words)
