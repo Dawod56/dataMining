@@ -211,7 +211,7 @@ class DataProcessor:
         for word in wordDict:
             if maxThreshold >= wordDict[word] >= minThreshold:
                 resDict[word] = wordDict[word]
-
+        print(wordDict)
         return dict(zip(list(resDict.keys())[start:], list(resDict.values())[start:]))
 
     # Count the numbers of words that contains a particular letter
@@ -252,7 +252,7 @@ class DataProcessor:
 
 
 # Creating a DataProcessor object
-dp = DataProcessor(filename='contents.csv', columns=['Index','Chapter','Title','Content'], target_column='Content')
+dp = DataProcessor(filename='contents.csv', columns=['Index', 'Chapter', 'Title', 'Content'], target_column='Content')
 
 # List of all Bengali characters including letters and numbers
 BengaliLetterList = ['অ', 'আ', 'ই', 'ঈ', 'উ', 'ঊ', 'ঋ', 'এ', 'ঐ', 'ও', 'ঔ', 'ক', 'খ', 'গ', 'ঘ', 'ঙ', 'চ', 'ছ', 'জ', 'ঝ',
@@ -260,25 +260,25 @@ BengaliLetterList = ['অ', 'আ', 'ই', 'ঈ', 'উ', 'ঊ', 'ঋ', 'এ', '�
                      'ষ', 'স', 'হ', 'ড়', 'ঢ়', 'য়','ৎ']
 
 # Unigram
-plot_from_dictionary(dp.count_token_frequencies(1, minThreshold=1, start=-30), title='Unigram (Top 30 Results)',
+plot_from_dictionary(dp.count_token_frequencies(1, minThreshold=1, start=-20), title='Unigram (Top 20 Results)',
                      save_to_device=True)
 
 # Bigram
-plot_from_dictionary(dp.count_token_frequencies(2, minThreshold=1, start=-30), title='Bigram (Top 30 Results)',
+plot_from_dictionary(dp.count_token_frequencies(2, minThreshold=1, start=-20), title='Bigram (Top 20 Results)',
                      save_to_device=True)
 
 # Trigram
-plot_from_dictionary(dp.count_token_frequencies(3, minThreshold=2, start=-30), title='Trigram (Top 30 Results)',
+plot_from_dictionary(dp.count_token_frequencies(3, minThreshold=2, start=-20), title='Trigram (Top 20 Results)',
                      bottom=0.3,
                      save_to_device=True)
 
 # Tetragram
-plot_from_dictionary(dp.count_token_frequencies(4, minThreshold=2, start=-30), title='Tetragram (Top 30 Results)',
+plot_from_dictionary(dp.count_token_frequencies(4, minThreshold=2, start=-20), title='Tetragram (Top 20 Results)',
                      bottom=0.3,
                      save_to_device=True)
 
 # Pentagram
-plot_from_dictionary(dp.count_token_frequencies(5, minThreshold=2, start=-30), title='Pentagram (Top 30 Results)',
+plot_from_dictionary(dp.count_token_frequencies(5, minThreshold=2, start=-20), title='Pentagram (Top 20 Results)',
                      bottom=0.3, save_to_device=True)
 
 # Number of words start with a particular letter
